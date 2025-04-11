@@ -70,6 +70,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -129,15 +135,21 @@
   <ItemGroup>
     <ClCompile Include="Administrator.cpp" />
     <ClCompile Include="Auth.cpp" />
+    <ClCompile Include="AuthPage.cpp" />
     <ClCompile Include="LocParcare.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainPage.cpp" />
     <ClCompile Include="poo.cpp" />
+    <ClCompile Include="Rezervare.cpp" />
     <ClCompile Include="Utilizator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.h" />
     <ClInclude Include="Auth.h" />
+    <ClInclude Include="AuthPage.h" />
     <ClInclude Include="LocParcare.h" />
+    <ClInclude Include="MainPage.h" />
+    <ClInclude Include="Rezervare.h" />
     <ClInclude Include="Utilizator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

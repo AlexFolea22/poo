@@ -1,3 +1,6 @@
+#ifndef ADMINISTRATOR_H
+#define ADMINISTRATOR_H
+
 #include "Utilizator.h"
 #include "LocParcare.h"
 #include <vector>
@@ -9,7 +12,7 @@ private:
 
 public:
     Administrator(const std::string& nume, const std::string& prenume,
-        const std::string& email, const std::string& parola,
+        const std::string& email, const std::string& parola, const std::string& nrtel,
         int nivelAcces);
 
     int GetNivelAcces() const;
@@ -20,4 +23,4 @@ public:
     void OcupaLoc(const std::string& id);
     void AfiseazaLocuri() const;
 };
-
+#endif //ADMINISTRATOR_H

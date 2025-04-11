@@ -1,8 +1,7 @@
+﻿#include "Auth.h"
 #include <iostream>
 #include <fstream>
-#include <map>
-#include <string>
-#include "Auth.h"  !
+#include <sstream>
 
 Auth::Auth() {
     LoadCredentials();
@@ -11,24 +10,30 @@ Auth::Auth() {
 void Auth::LoadCredentials() {
     std::ifstream file(CREDENTIALS_FILE);
     if (file.is_open()) {
-        std::string email, password;
-        while (file >> email >> password) {
-            users[email] = password;
+        std::string line;
+        while (std::getline(file, line)) {
+            std::stringstream ss(line);
+            std::string email, parola, nume, prenume, nrtel;
+            if (ss >> email >> parola >> nume >> prenume >> nrtel) {
+                Utilizator user(nume, prenume, email, parola, nrtel);
+                users[email] = user;
+            }
         }
         file.close();
     }
 }
 
-void Auth::SaveCredentials(const std::string& email, const std::string& password) {
+void Auth::SaveCredentials(const Utilizator& user) {
     std::ofstream file(CREDENTIALS_FILE, std::ios::app);
     if (file.is_open()) {
-        file << email << " " << password << "\n";
+        file << user.GetEmail() << " " << user.GetParola() << " " << user.GetNume() << " " << user.GetPrenume() << " " << user.GetNrTel() << "\n";
         file.close();
     }
 }
 
 void Auth::Signup() {
-    std::string email, password;
+    std::string email, password, nume, prenume, nrtel;
+
     std::cout << "Introdu un email: ";
     std::cin >> email;
 
@@ -40,8 +45,18 @@ void Auth::Signup() {
     std::cout << "Alege o parola: ";
     std::cin >> password;
 
-    users[email] = password;
-    SaveCredentials(email, password);
+    std::cout << "Introdu numele: ";
+    std::cin >> nume;
+
+    std::cout << "Introdu prenumele: ";
+    std::cin >> prenume;
+
+    std::cout << "Introdu numarul de telefon: ";
+    std::cin >> nrtel;
+
+    Utilizator user(nume, prenume, email, password, nrtel);
+    users[email] = user;
+    SaveCredentials(user);
 
     std::cout << "Cont creat cu succes!\n";
 }
@@ -53,12 +68,15 @@ bool Auth::Login() {
     std::cout << "Introdu parola: ";
     std::cin >> password;
 
-    if (users.find(email) != users.end() && users[email] == password) {
+    auto it = users.find(email);
+    if (it != users.end() && it->second.GetParola() == password) {
         std::cout << "Autentificare reusita!" << "\n";
+        MainPage mainPage(users);
+        mainPage.Run();
         return true;
     }
     else {
-        std::cout << "Eroare: Email sau parola greaita!\n";
+        std::cout << "Eroare: Email sau parola gresita!\n";
         return false;
     }
 }

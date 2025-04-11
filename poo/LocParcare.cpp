@@ -12,8 +12,11 @@ std::string LocParcare::GetZona() const {
     return m_Zona;
 }
 
-void LocParcare::SetId(const std::string& id) {
-    m_IdParcare = id;
+void LocParcare::SetIdParcare(const std::string& idparcare) {
+    m_IdParcare = idparcare;
+}
+void LocParcare::SetIdLoc(const std::string& idloc) {
+    m_IdLoc = idloc;
 }
 
 void LocParcare::SetZona(const std::string& zona) {

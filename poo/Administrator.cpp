@@ -1,10 +1,10 @@
 ﻿#include "Administrator.h"
 #include <iostream>
 
-Administrator::Administrator(const std::string& nume, const std::string& prenume,
-    const std::string& email, const std::string& parola,
+Administrator::Administrator(const std::string & nume, const std::string & prenume,
+    const std::string & email, const std::string & parola, const std::string& nrtel,
     int nivelAcces)
-    : Utilizator(nume, prenume, email, parola), nivelAcces(nivelAcces) {
+    : Utilizator(nume, prenume, email, parola, nrtel), nivelAcces(nivelAcces) {
 }
 
 int Administrator::GetNivelAcces() const {
@@ -29,7 +29,7 @@ void Administrator::OcupaLoc(const std::string& id) {
             return;
         }
     }
-    std::cout << "Locul " << id << " este deja ocupat sau nu există.\n";
+    std::cout<<"Locul"<< id<<"este deja ocupat sau nu exista.\n";
 }
 
 // Eliberează un loc de parcare pe baza ID-ului
@@ -41,7 +41,7 @@ void Administrator::ElibereazaLoc(const std::string& id) {
             return;
         }
     }
-    std::cout << "Locul " << id << " nu este ocupat sau nu există.\n";
+    std::cout << "Locul " << id << " nu este ocupat sau nu exista.\n";
 }
 
 //Afișează toate locurile de parcare gestionate
